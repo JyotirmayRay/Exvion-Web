@@ -5,7 +5,7 @@ import { CreateLeadDto } from "./dto/create-lead.dto";
 import { UpdateLeadStatusDto, AddNoteDto } from "./dto/update-lead.dto";
 import { QueryLeadsDto } from "./dto/query-lead.dto";
 import { calculateLeadScore } from "./scoring.engine";
-import { LeadStatus } from "@exvion/database";
+import { LeadStatus, Lead, Note } from "@exvion/database";
 
 @Injectable()
 export class LeadsService {
@@ -63,7 +63,7 @@ export class LeadsService {
     };
   }
 
-  async findAll(query: QueryLeadsDto) {
+  async findAll(query: QueryLeadsDto): Promise<{ data: Lead[]; total: number; page: number; limit: number; pages: number }> {
     const { where, skip, limit } = this.buildWhereClause(query);
 
     const [leads, total] = await this.prisma.$transaction([
@@ -86,7 +86,7 @@ export class LeadsService {
     };
   }
 
-  async count(query: QueryLeadsDto) {
+  async count(query: QueryLeadsDto): Promise<number> {
     const { where } = this.buildWhereClause(query);
     return this.prisma.lead.count({ where });
   }
@@ -118,7 +118,7 @@ export class LeadsService {
     return { where, skip, limit };
   }
 
-  async findOne(id: string) {
+  async findOne(id: string): Promise<Lead> {
     const lead = await this.prisma.lead.findUnique({
       where: { id },
       include: { answers: true, notes: { orderBy: { createdAt: "desc" } } },
@@ -127,7 +127,7 @@ export class LeadsService {
     return lead;
   }
 
-  async updateStatus(id: string, dto: UpdateLeadStatusDto) {
+  async updateStatus(id: string, dto: UpdateLeadStatusDto): Promise<Lead> {
     await this.findOne(id);
     return this.prisma.lead.update({
       where: { id },
@@ -148,7 +148,7 @@ export class LeadsService {
     });
   }
 
-  async addNote(id: string, dto: AddNoteDto) {
+  async addNote(id: string, dto: AddNoteDto): Promise<Note> {
     await this.findOne(id);
     return this.prisma.note.create({
       data: { 

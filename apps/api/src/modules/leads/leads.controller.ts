@@ -11,7 +11,7 @@ import { UpdateLeadStatusDto, AddNoteDto } from "./dto/update-lead.dto";
 import { QueryLeadsDto } from "./dto/query-lead.dto";
 import { JwtAuthGuard } from "../../common/guards/jwt-auth.guard";
 import { Throttle, ThrottlerGuard } from "@nestjs/throttler";
-import { LeadStatus } from "@exvion/database";
+import { LeadStatus, Lead, Note } from "@exvion/database";
 import * as Papa from "papaparse";
 
 @Controller("leads")
@@ -28,19 +28,19 @@ export class LeadsController {
 
   @Get()
   @UseGuards(JwtAuthGuard)
-  findAll(@Query() query: QueryLeadsDto) {
+  findAll(@Query() query: QueryLeadsDto): Promise<{ data: Lead[]; total: number; page: number; limit: number; pages: number }> {
     return this.leadsService.findAll(query);
   }
 
   @Get("count")
   @UseGuards(JwtAuthGuard)
-  getCount(@Query() query: QueryLeadsDto) {
+  getCount(@Query() query: QueryLeadsDto): Promise<number> {
     return this.leadsService.count(query);
   }
 
   @Get("stats")
   @UseGuards(JwtAuthGuard)
-  getDashboardStats() {
+  getDashboardStats(): Promise<any> {
     return this.leadsService.getDashboardStats();
   }
 
@@ -90,7 +90,7 @@ export class LeadsController {
 
   @Get(":id")
   @UseGuards(JwtAuthGuard)
-  findOne(@Param("id") id: string) {
+  findOne(@Param("id") id: string): Promise<Lead> {
     return this.leadsService.findOne(id);
   }
 
@@ -99,7 +99,7 @@ export class LeadsController {
   updateStatus(
     @Param("id") id: string,
     @Body() dto: UpdateLeadStatusDto,
-  ) {
+  ): Promise<Lead> {
     return this.leadsService.updateStatus(id, dto);
   }
 
@@ -108,7 +108,7 @@ export class LeadsController {
   addNote(
     @Param("id") id: string,
     @Body() dto: AddNoteDto,
-  ) {
+  ): Promise<Note> {
     return this.leadsService.addNote(id, dto);
   }
 }
