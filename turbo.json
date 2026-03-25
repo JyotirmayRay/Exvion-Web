@@ -3,8 +3,11 @@
   "globalDependencies": [".env"],
   "tasks": {
     "build": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build", "prisma:generate"],
       "outputs": [".next/**", "dist/**"],
+      "cache": true
+    },
+    "prisma:generate": {
       "cache": true
     },
     "dev": {
@@ -19,7 +22,7 @@
       "cache": true
     },
     "type-check": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build", "prisma:generate"],
       "outputs": []
     }
   }
