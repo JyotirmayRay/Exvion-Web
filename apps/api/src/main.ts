@@ -24,7 +24,7 @@ async function bootstrap() {
 
   app.setGlobalPrefix("api");
 
-  const port = process.env.PORT || 3001;
+  const port = process.env.PORT || 3000;
   await app.listen(port);
   console.log(`Exvion API running on port ${port}`);
 }

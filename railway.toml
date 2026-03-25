@@ -1,44 +1,7 @@
-# Railway Monorepo Config
-
-[services.api]
-source = "apps/api"
-watch = true
-[services.api.build]
+[build]
 builder = "NIXPACKS"
-buildCommand = "pnpm install && pnpm prisma:generate && pnpm build"
-[services.api.deploy]
-startCommand = "pnpm start:prod"
-healthcheckPath = "/api/health"
-healthcheckTimeout = 100
-restartPolicy = "ON_FAILURE"
-[services.api.variables]
-NIXPACKS_PKGS = "pnpm"
-NIXPACKS_INSTALL_CMD = "pnpm install"
 
-[services.web]
-source = "apps/web"
-watch = true
-[services.web.build]
-builder = "NIXPACKS"
-buildCommand = "pnpm install && pnpm build"
-[services.web.deploy]
-startCommand = "pnpm start"
+[deploy]
+startCommand = "pnpm start:web"
 healthcheckPath = "/"
 restartPolicy = "ALWAYS"
-[services.web.variables]
-NIXPACKS_PKGS = "pnpm"
-NIXPACKS_INSTALL_CMD = "pnpm install"
-
-[services.admin]
-source = "apps/admin"
-watch = true
-[services.admin.build]
-builder = "NIXPACKS"
-buildCommand = "pnpm install && pnpm build"
-[services.admin.deploy]
-startCommand = "pnpm start"
-healthcheckPath = "/"
-restartPolicy = "ALWAYS"
-[services.admin.variables]
-NIXPACKS_PKGS = "pnpm"
-NIXPACKS_INSTALL_CMD = "pnpm install"

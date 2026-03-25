@@ -3,6 +3,12 @@
   "private": true,
   "scripts": {
     "build": "turbo run build",
+    "build:web": "pnpm --filter web build",
+    "start:web": "pnpm --filter web start",
+    "build:admin": "pnpm --filter admin build",
+    "start:admin": "pnpm --filter admin start",
+    "build:api": "pnpm --filter api build",
+    "start:api": "pnpm --filter api start:prod",
     "dev": "turbo run dev",
     "start": "turbo run start",
     "prisma:generate": "pnpm --filter api exec prisma generate --schema=apps/api/prisma/schema.prisma",
@@ -15,8 +21,9 @@
     "turbo": "^2.8.20",
     "typescript": "5.9.2"
   },
-  "packageManager": "pnpm@9.0.0",
+  "packageManager": "pnpm@8.15.5",
   "engines": {
-    "node": ">=18"
+    "node": ">=18",
+    "pnpm": ">=8"
   }
 }

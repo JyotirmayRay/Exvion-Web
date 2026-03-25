@@ -1,6 +1,6 @@
 # Global Nixpacks Configuration
 [phases.setup]
-nixPkgs = ["pnpm", "nodejs_18"]
+nixPkgs = ["nodejs", "pnpm"]
 
 [phases.install]
-cmds = ["pnpm install"]
+cmds = ["pnpm install --frozen-lockfile"]
