@@ -1,5 +1,5 @@
 import { IsEnum, IsString, IsOptional } from "class-validator";
-import { LeadStatus } from "@prisma/client";
+import { LeadStatus } from "@exvion/database";
 
 export class UpdateLeadStatusDto {
   @IsEnum(LeadStatus)

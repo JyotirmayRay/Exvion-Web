@@ -1,6 +1,6 @@
 import { IsOptional, IsString, IsEnum } from "class-validator";
 import { Transform } from "class-transformer";
-import { LeadStatus } from "@prisma/client";
+import { LeadStatus } from "@exvion/database";
 
 export class QueryLeadsDto {
   @IsOptional()

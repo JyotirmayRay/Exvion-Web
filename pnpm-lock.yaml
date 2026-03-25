@@ -108,6 +108,9 @@ importers:
       '@exvion/config':
         specifier: workspace:*
         version: link:../../packages/config
+      '@exvion/database':
+        specifier: workspace:*
+        version: link:../../packages/database
       '@exvion/types':
         specifier: workspace:*
         version: link:../../packages/types
@@ -135,9 +138,6 @@ importers:
       '@nestjs/throttler':
         specifier: ^6.5.0
         version: 6.5.0(@nestjs/common@10.4.22)(@nestjs/core@10.4.22)(reflect-metadata@0.2.2)
-      '@prisma/client':
-        specifier: ^5.22.0
-        version: 5.22.0(prisma@5.22.0)
       bcryptjs:
         specifier: ^3.0.3
         version: 3.0.3
@@ -217,9 +217,6 @@ importers:
       papaparse:
         specifier: ^5.5.3
         version: 5.5.3
-      prisma:
-        specifier: ^5.22.0
-        version: 5.22.0
       source-map-support:
         specifier: ^0.5.21
         version: 0.5.21
@@ -319,6 +316,19 @@ importers:
     devDependencies:
       typescript:
         specifier: ^5.3.3
+        version: 5.9.2
+
+  packages/database:
+    dependencies:
+      '@prisma/client':
+        specifier: ^5.22.0
+        version: 5.22.0(prisma@5.22.0)
+    devDependencies:
+      prisma:
+        specifier: ^5.22.0
+        version: 5.22.0
+      typescript:
+        specifier: ^5.9.2
         version: 5.9.2
 
   packages/eslint-config:

@@ -3,7 +3,7 @@
   "globalDependencies": [".env"],
   "tasks": {
     "build": {
-      "dependsOn": ["^build", "prisma:generate"],
+      "dependsOn": ["^build", "@exvion/database#prisma:generate"],
       "outputs": [".next/**", "dist/**"],
       "cache": true
     },
@@ -22,7 +22,7 @@
       "cache": true
     },
     "type-check": {
-      "dependsOn": ["^build", "prisma:generate"],
+      "dependsOn": ["^build", "@exvion/database#prisma:generate"],
       "outputs": []
     }
   }

@@ -5,7 +5,7 @@ import { CreateLeadDto } from "./dto/create-lead.dto";
 import { UpdateLeadStatusDto, AddNoteDto } from "./dto/update-lead.dto";
 import { QueryLeadsDto } from "./dto/query-lead.dto";
 import { calculateLeadScore } from "./scoring.engine";
-import { LeadStatus } from "@prisma/client";
+import { LeadStatus } from "@exvion/database";
 
 @Injectable()
 export class LeadsService {

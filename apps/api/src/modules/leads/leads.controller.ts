@@ -11,7 +11,7 @@ import { UpdateLeadStatusDto, AddNoteDto } from "./dto/update-lead.dto";
 import { QueryLeadsDto } from "./dto/query-lead.dto";
 import { JwtAuthGuard } from "../../common/guards/jwt-auth.guard";
 import { Throttle, ThrottlerGuard } from "@nestjs/throttler";
-import { LeadStatus } from "@prisma/client";
+import { LeadStatus } from "@exvion/database";
 import * as Papa from "papaparse";
 
 @Controller("leads")

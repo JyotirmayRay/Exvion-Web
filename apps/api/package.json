@@ -4,7 +4,6 @@
   "private": true,
   "scripts": {
     "build": "nest build",
-    "prebuild": "prisma generate",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "dev": "nest start --watch",
@@ -16,11 +15,11 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "prisma:generate": "prisma generate",
-    "prisma:migrate": "prisma migrate dev"
+    "prisma:migrate": "pnpm --filter @exvion/database run prisma:migrate"
   },
   "dependencies": {
     "@exvion/config": "workspace:*",
+    "@exvion/database": "workspace:*",
     "@exvion/types": "workspace:*",
     "@exvion/utils": "workspace:*",
     "@nestjs/common": "^10.0.0",
@@ -30,7 +29,6 @@
     "@nestjs/passport": "^10.0.3",
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/throttler": "^6.5.0",
-    "@prisma/client": "^5.22.0",
     "bcryptjs": "^3.0.3",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.4",
@@ -59,7 +57,6 @@
     "@types/supertest": "^6.0.0",
     "jest": "^29.5.0",
     "papaparse": "^5.5.3",
-    "prisma": "^5.22.0",
     "source-map-support": "^0.5.21",
     "supertest": "^7.0.0",
     "ts-jest": "^29.1.0",
