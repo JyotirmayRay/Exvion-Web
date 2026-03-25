@@ -1,0 +1,94 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Lead {
+  id          String       @id @default(uuid())
+  name        String
+  email       String
+  phone       String
+  company     String?
+  serviceType String
+  projectType String?
+  stage       String?
+  budget      String?
+  timeline    String?
+  description String?
+  score       Int          @default(0)
+  status      LeadStatus   @default(NEW)
+  source      String?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  answers     LeadAnswer[]
+  notes       Note[]
+  bookings    Booking[]
+}
+
+model LeadAnswer {
+  id       String @id @default(uuid())
+  leadId   String
+  question String
+  answer   String
+  lead     Lead   @relation(fields: [leadId], references: [id], onDelete: Cascade)
+}
+
+model Note {
+  id        String   @id @default(uuid())
+  leadId    String
+  content   String
+  type      String   @default("note") // note, call, status_change, import
+  metadata  Json?
+  createdAt DateTime @default(now())
+  lead     Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+}
+
+model AdminUser {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      String   @default("admin")
+  createdAt DateTime @default(now())
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  QUALIFIED
+  PROPOSAL
+  WON
+  LOST
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+model Booking {
+  id        String        @id @default(uuid())
+  leadId    String
+  startTime DateTime
+  endTime   DateTime
+  status    BookingStatus @default(PENDING)
+  location  String?       @default("Google Meet")
+  meetLink  String?
+  notes     String?
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  lead      Lead          @relation(fields: [leadId], references: [id], onDelete: Cascade)
+}
+
+model Setting {
+  id        String   @id @default(uuid())
+  key       String   @unique // e.g., 'GOOGLE_SERVICE_ACCOUNT_JSON'
+  value     String   @db.Text
+  updatedAt DateTime @updatedAt
+}

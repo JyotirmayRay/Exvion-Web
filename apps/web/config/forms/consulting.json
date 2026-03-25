@@ -1,0 +1,72 @@
+{
+  "service": "Startup Tech Consulting",
+  "steps": [
+    {
+      "id": "project_type",
+      "question": "What do you need help with?",
+      "type": "single",
+      "options": [
+        { "value": "roadmap", "label": "Tech Roadmapping", "icon": "🗺️" },
+        { "value": "audit", "label": "Code/Architecture Audit", "icon": "🔍" },
+        { "value": "stack", "label": "Stack Selection", "icon": "⚙️" },
+        { "value": "cto", "label": "CTO-as-a-Service", "icon": "🤝" }
+      ]
+    },
+    {
+      "id": "stage",
+      "question": "What stage are you at?",
+      "type": "single",
+      "options": [
+        { "value": "idea", "label": "Pre-seed / Idea", "icon": "💡" },
+        { "value": "seed", "label": "Seed / Building", "icon": "🏗️" },
+        { "value": "series_a", "label": "Growth / Scaling", "icon": "📈" },
+        { "value": "enterprise", "label": "Enterprise / Mature", "icon": "🏢" }
+      ]
+    },
+    {
+      "id": "budget",
+      "question": "What is your monthly consulting budget?",
+      "type": "single",
+      "options": [
+        { "value": "under_25k", "label": "Entry Level / Seed", "icon": "💰" },
+        { "value": "25k_75k", "label": "CustomK – CustomK", "icon": "💰💰" },
+        { "value": "above_75k", "label": "CustomK+", "icon": "💰💰💰" },
+        { "value": "one_time", "label": "One-time project", "icon": "📦" }
+      ]
+    },
+    {
+      "id": "timeline",
+      "question": "How soon do you need clarity?",
+      "type": "single",
+      "options": [
+        { "value": "urgent", "label": "Immediately / Urgent", "icon": "🔥" },
+        { "value": "1_month", "label": "Within 1 month", "icon": "📅" },
+        { "value": "flexible", "label": "Flexible", "icon": "⏳" }
+      ]
+    },
+    {
+      "id": "features",
+      "question": "What are your top concerns?",
+      "type": "multi",
+      "options": [
+        { "value": "scaling", "label": "Scalability Issues" },
+        { "value": "security", "label": "Security Audit" },
+        { "value": "hiring", "label": "Technical Hiring" },
+        { "value": "costs", "label": "Cloud Cost Optimisation" },
+        { "value": "architecture", "label": "Architecture Review" }
+      ]
+    },
+    {
+      "id": "description",
+      "question": "Tell us about your technical challenges",
+      "type": "textarea",
+      "placeholder": "What's keeping you up at night regarding your technology?"
+    },
+    {
+      "id": "contact",
+      "question": "How can we reach you?",
+      "type": "contact",
+      "fields": ["name", "email", "phone", "company"]
+    }
+  ]
+}

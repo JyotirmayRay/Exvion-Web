@@ -1,0 +1,54 @@
+{
+  "name": "Exvion Lead Manager",
+  "short_name": "Exvion",
+  "description": "Lead management and sales pipeline",
+  "start_url": "/dashboard",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone"],
+  "background_color": "#0A0A0F",
+  "theme_color": "#0A0A0F",
+  "orientation": "any",
+  "scope": "/",
+  "categories": ["business", "productivity"],
+  "icons": [
+    {
+      "src": "/icons/icon-72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "New Leads",
+      "url": "/leads?status=NEW",
+      "icons": [{ "src": "/icons/shortcut-leads.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "High Value",
+      "url": "/leads?tier=high",
+      "icons": [{ "src": "/icons/shortcut-fire.png", "sizes": "96x96" }]
+    }
+  ]
+}

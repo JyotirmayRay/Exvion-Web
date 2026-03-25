@@ -1,0 +1,76 @@
+{
+  "service": "SaaS Development",
+  "steps": [
+    {
+      "id": "project_type",
+      "question": "What do you want to build?",
+      "type": "single",
+      "options": [
+        { "value": "saas", "label": "SaaS Platform", "icon": "🚀" },
+        { "value": "mvp", "label": "MVP / Prototype", "icon": "⚡" },
+        { "value": "internal_tool", "label": "Internal Tool", "icon": "🛠️" },
+        { "value": "api", "label": "API / Backend", "icon": "🔗" }
+      ]
+    },
+    {
+      "id": "stage",
+      "question": "What stage are you at?",
+      "type": "single",
+      "options": [
+        { "value": "idea", "label": "Just an idea", "icon": "💡" },
+        { "value": "mvp", "label": "Building MVP", "icon": "🏗️" },
+        { "value": "scaling", "label": "Scaling existing product", "icon": "📈" },
+        { "value": "rebuild", "label": "Rebuilding / Migrating", "icon": "🔄" }
+      ]
+    },
+    {
+      "id": "budget",
+      "question": "What is your estimated budget?",
+      "type": "single",
+      "options": [
+        { "value": "under_50k", "label": "Entry Level / Seed", "icon": "💰" },
+        { "value": "50k_2l", "label": "CustomK – Custom Lakhs", "icon": "💰💰" },
+        { "value": "above_2l", "label": "Custom Lakhs+", "icon": "💰💰💰" },
+        { "value": "discuss", "label": "Let's discuss", "icon": "🤝" }
+      ]
+    },
+    {
+      "id": "timeline",
+      "question": "How soon do you want to start?",
+      "type": "single",
+      "options": [
+        { "value": "urgent", "label": "Immediately / Urgent", "icon": "🔥" },
+        { "value": "1_month", "label": "Within 1 month", "icon": "📅" },
+        { "value": "1_3_months", "label": "1 – 3 months", "icon": "🗓️" },
+        { "value": "flexible", "label": "Flexible / Planning", "icon": "⏳" }
+      ]
+    },
+    {
+      "id": "features",
+      "question": "What features do you need?",
+      "type": "multi",
+      "options": [
+        { "value": "auth", "label": "Auth / Login System" },
+        { "value": "payments", "label": "Payments / Subscriptions" },
+        { "value": "dashboard", "label": "Dashboard / Analytics" },
+        { "value": "api", "label": "API Integration" },
+        { "value": "notifications", "label": "Email / WhatsApp Notifications" },
+        { "value": "ai", "label": "AI Features" },
+        { "value": "admin", "label": "Admin Panel" },
+        { "value": "mobile", "label": "Mobile App" }
+      ]
+    },
+    {
+      "id": "description",
+      "question": "Tell us about your idea",
+      "type": "textarea",
+      "placeholder": "Describe what you want to build, who it's for, and any specific requirements..."
+    },
+    {
+      "id": "contact",
+      "question": "How can we reach you?",
+      "type": "contact",
+      "fields": ["name", "email", "phone", "company"]
+    }
+  ]
+}

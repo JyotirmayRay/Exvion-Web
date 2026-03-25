@@ -1,0 +1,72 @@
+{
+  "service": "High-Converting Website Systems",
+  "steps": [
+    {
+      "id": "project_type",
+      "question": "What kind of website?",
+      "type": "single",
+      "options": [
+        { "value": "corporate", "label": "Corporate Website", "icon": "🏢" },
+        { "value": "agency", "label": "Agency Site", "icon": "💼" },
+        { "value": "landing", "label": "Landing Page / SaaS", "icon": "🚀" },
+        { "value": "lead_gen", "label": "Lead Gen System", "icon": "📋" }
+      ]
+    },
+    {
+      "id": "stage",
+      "question": "Current status?",
+      "type": "single",
+      "options": [
+        { "value": "new", "label": "New business", "icon": "✨" },
+        { "value": "rebrand", "label": "Rebranding / Rebuild", "icon": "🔄" },
+        { "value": "optimized", "label": "Conversion focus only", "icon": "🎯" }
+      ]
+    },
+    {
+      "id": "budget",
+      "question": "What is your estimated budget?",
+      "type": "single",
+      "options": [
+        { "value": "under_30k", "label": "Entry Level / Seed", "icon": "💰" },
+        { "value": "30k_1l", "label": "CustomK – Custom Lakh", "icon": "💰💰" },
+        { "value": "above_1l", "label": "Custom Lakh+", "icon": "💰💰💰" },
+        { "value": "discuss", "label": "Let's discuss", "icon": "🤝" }
+      ]
+    },
+    {
+      "id": "timeline",
+      "question": "When do you want to launch?",
+      "type": "single",
+      "options": [
+        { "value": "urgent", "label": "Immediately / Urgent", "icon": "🔥" },
+        { "value": "2_weeks", "label": "Inside 2 weeks", "icon": "⚡" },
+        { "value": "1_month", "label": "Within 1 month", "icon": "📅" },
+        { "value": "flexible", "label": "Flexible", "icon": "⏳" }
+      ]
+    },
+    {
+      "id": "features",
+      "question": "What integrations do you need?",
+      "type": "multi",
+      "options": [
+        { "value": "forms", "label": "Smart Forms / Lead Cap" },
+        { "value": "crm", "label": "CRM Integration" },
+        { "value": "whatsapp", "label": "WhatsApp Widget" },
+        { "value": "analytics", "label": "Custom Analytics" },
+        { "value": "cms", "label": "CMS (Blog/Content)" }
+      ]
+    },
+    {
+      "id": "description",
+      "question": "Tell us about your brand and goals",
+      "type": "textarea",
+      "placeholder": "What do you want your website to achieve for your business?"
+    },
+    {
+      "id": "contact",
+      "question": "How can we reach you?",
+      "type": "contact",
+      "fields": ["name", "email", "phone", "company"]
+    }
+  ]
+}
