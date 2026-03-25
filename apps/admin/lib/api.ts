@@ -64,11 +64,11 @@ export const api = {
     return res.json();
   },
 
-  addNote: async (id: string, content: string) => {
+  addNote: async (id: string, content: string, type?: string, metadata?: any) => {
     const res = await fetch(`${BASE}/leads/${id}/notes`, {
       method: "POST",
       headers: headers(),
-      body: JSON.stringify({ content }),
+      body: JSON.stringify({ content, type, metadata }),
     });
     if (!res.ok) throw new Error("Note failed");
     return res.json();
