@@ -11,6 +11,9 @@ startCommand = "pnpm start:prod"
 healthcheckPath = "/api/health"
 healthcheckTimeout = 100
 restartPolicy = "ON_FAILURE"
+[services.api.variables]
+NIXPACKS_PKGS = "pnpm"
+NIXPACKS_INSTALL_CMD = "pnpm install"
 
 [services.web]
 source = "apps/web"
@@ -22,6 +25,9 @@ buildCommand = "pnpm install && pnpm build"
 startCommand = "pnpm start"
 healthcheckPath = "/"
 restartPolicy = "ALWAYS"
+[services.web.variables]
+NIXPACKS_PKGS = "pnpm"
+NIXPACKS_INSTALL_CMD = "pnpm install"
 
 [services.admin]
 source = "apps/admin"
@@ -33,3 +39,6 @@ buildCommand = "pnpm install && pnpm build"
 startCommand = "pnpm start"
 healthcheckPath = "/"
 restartPolicy = "ALWAYS"
+[services.admin.variables]
+NIXPACKS_PKGS = "pnpm"
+NIXPACKS_INSTALL_CMD = "pnpm install"
