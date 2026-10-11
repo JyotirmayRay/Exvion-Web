@@ -1,15 +1,14 @@
 const CACHE = "exvion-admin-v1";
-const OFFLINE_URL = "/offline";
+const OFFLINE_URL = "/admin/offline";
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE).then((cache) =>
       cache.addAll([
-        "/",
-        "/dashboard",
-        "/leads",
-        "/offline",
-        "/_next/static/css/app.css",
+        "/admin",
+        "/admin/dashboard",
+        "/admin/leads",
+        "/admin/offline",
       ])
     )
   );

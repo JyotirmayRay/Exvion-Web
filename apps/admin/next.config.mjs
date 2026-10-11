@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  basePath: "/admin",
   output: process.env.VERCEL ? undefined : "standalone",
   reactStrictMode: true,
   eslint: {

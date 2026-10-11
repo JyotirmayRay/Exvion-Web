@@ -11,7 +11,7 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   title: "Exvion Admin",
   description: "Lead management and sales pipeline",
-  manifest: "/manifest.json",
+  manifest: "/admin/manifest.json",
   themeColor: "#0A0A0F",
   viewport: "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover",
   appleWebApp: {
@@ -32,7 +32,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="Exvion" />
-        <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+        <link rel="apple-touch-icon" href="/admin/icons/icon-192.png" />
       </head>
       <body 
         className={`${spaceGrotesk.className} bg-brand-dark text-white 
@@ -44,7 +44,7 @@ export default function RootLayout({
           {`
             if ('serviceWorker' in navigator) {
               window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js').catch(err => console.log('SW reg error:', err));
+                navigator.serviceWorker.register('/admin/sw.js').catch(err => console.log('SW reg error:', err));
               });
             }
           `}

@@ -1,4 +1,10 @@
 export const getApiBaseUrl = (): string => {
+  // If running on the server in a Vercel Function with service binding
+  if (typeof window === "undefined" && process.env.API_URL) {
+    const internalUrl = process.env.API_URL.replace(/\/+$/, "");
+    return internalUrl.endsWith("/api") ? internalUrl : `${internalUrl}/api`;
+  }
+
   const envUrl = process.env.NEXT_PUBLIC_API_URL;
   if (!envUrl) {
     if (typeof window !== "undefined") {
