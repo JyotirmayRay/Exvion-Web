@@ -22,6 +22,7 @@
     "@exvion/database": "workspace:*",
     "@exvion/types": "workspace:*",
     "@exvion/utils": "workspace:*",
+    "@prisma/client": "^5.22.0",
     "@nestjs/common": "^10.0.0",
     "@nestjs/config": "^4.0.3",
     "@nestjs/core": "^10.0.0",
