@@ -15,7 +15,8 @@
     "prisma:generate": "turbo run @exvion/database#prisma:generate",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "check-types": "turbo run type-check"
+    "check-types": "turbo run type-check",
+    "type-check": "turbo run type-check"
   },
   "devDependencies": {
     "prettier": "^3.7.4",
