@@ -1,10 +1,12 @@
 "use client";
+import { useEffect, useState } from "react";
+import { useRouter, usePathname } from "next/navigation";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { TopBar } from "@/components/layout/TopBar";
 import { MobileHeader } from "@/components/layout/MobileHeader";
 import { MobileTabNav } from "@/components/layout/MobileTabNav";
-import { motion, AnimatePresence } from "framer-motion";
-import { usePathname } from "next/navigation";
+import { motion } from "framer-motion";
+import { useAuthStore } from "@/store/useAuthStore";
 
 export default function PanelLayout({
   children,
@@ -12,6 +14,27 @@ export default function PanelLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const router = useRouter();
+  const { token } = useAuthStore();
+  const [authorized, setAuthorized] = useState(false);
+
+  useEffect(() => {
+    const storedToken =
+      token || (typeof window !== "undefined" && localStorage.getItem("exvion_token"));
+    if (!storedToken) {
+      router.push("/login");
+    } else {
+      setAuthorized(true);
+    }
+  }, [token, router]);
+
+  if (!authorized) {
+    return (
+      <div className="flex min-h-screen bg-brand-dark items-center justify-center">
+        <div className="w-6 h-6 border-2 border-brand-primary border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
 
   return (
     <div className="flex min-h-screen bg-brand-dark">
