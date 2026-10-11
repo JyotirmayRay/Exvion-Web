@@ -1,159 +1,102 @@
-# Turborepo starter
+# Exvion Monorepo
 
-This Turborepo starter is maintained by the Turborepo core team.
+Enterprise digital services and multi-channel lead generation platform built with Turborepo, Next.js 14, NestJS, and Prisma.
 
-## Using this example
+## Repository Structure
 
-Run the following command:
-
-```sh
-npx create-turbo@latest
+```
+.
+├── apps/
+│   ├── web/           # Customer-facing marketing & booking site (Next.js 14)
+│   ├── admin/         # Internal CRM & leads dashboard (Next.js 14)
+│   └── api/           # Backend REST API (NestJS + Prisma)
+└── packages/
+    ├── config/        # Shared environment & site configuration
+    ├── database/      # Prisma ORM schema & client
+    ├── types/         # Shared TypeScript interfaces & types
+    ├── ui/            # Shared React UI component library
+    ├── utils/         # Common utility helpers
+    ├── eslint-config/ # ESLint 9 configuration
+    └── typescript-config/ # TypeScript configurations
 ```
 
-## What's inside?
+## Getting Started
 
-This Turborepo includes the following packages/apps:
+### Prerequisites
 
-### Apps and Packages
+- Node.js >= 18
+- pnpm >= 8.15 (`corepack enable && corepack prepare pnpm@8.15.5 --activate`)
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+### Installation
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo build
+```bash
+pnpm install
 ```
 
-Without global `turbo`, use your package manager:
+### Development
 
-```sh
-cd my-turborepo
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
+To run all apps concurrently:
+
+```bash
+pnpm dev
 ```
 
-You can build a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+- **Web (Customer App):** [http://localhost:3000](http://localhost:3000)
+- **Admin (CRM App):** [http://localhost:3002](http://localhost:3002)
+- **API (NestJS):** [http://localhost:3001](http://localhost:3001)
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
+### Building
 
-```sh
-turbo build --filter=docs
+```bash
+# Build all packages & applications
+pnpm build
+
+# Build only customer web app
+pnpm build:web
+
+# Typecheck and lint
+pnpm check-types
+pnpm lint
 ```
 
-Without global `turbo`:
+---
 
-```sh
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-```
+## Deploying to Vercel (vercel.com)
 
-### Develop
+`apps/web` is optimized and pre-configured for deployment on Vercel.
 
-To develop all apps and packages, run the following command:
+### Recommended Setup (Single Project: Web Frontend)
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
+1. **Import Repository**:
+   - Go to [vercel.com/new](https://vercel.com/new) and select `Exvion-Web`.
 
-```sh
-cd my-turborepo
-turbo dev
-```
+2. **Configure Project Settings**:
+   - **Framework Preset**: Next.js
+   - **Root Directory**: `apps/web` *(Important: click Edit and choose `apps/web`)*
+   - **Build Command**: `pnpm build` (or leave default `next build`)
+   - **Install Command**: `pnpm install` (or leave default)
+   - **Output Directory**: `.next`
 
-Without global `turbo`, use your package manager:
+3. **Environment Variables**:
+   Add the following in the Vercel Project Settings under **Environment Variables**:
 
-```sh
-cd my-turborepo
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
-```
+   | Key | Description | Example / Default |
+   |-----|-------------|-------------------|
+   | `NEXT_PUBLIC_API_URL` | Base URL of your backend NestJS API | `https://api.exvionglobal.com` |
 
-You can develop a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+   > **Note**: If `NEXT_PUBLIC_API_URL` is omitted, the frontend automatically routes API requests through `/api/*` which proxies to `https://api.exvionglobal.com/api/*` via the included `vercel.json` rewrites.
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
+4. **Deploy**:
+   Click **Deploy**. Vercel will automatically build the Next.js static and serverless artifacts.
 
-```sh
-turbo dev --filter=web
-```
+---
 
-Without global `turbo`:
+### Deploying Admin App to Vercel
 
-```sh
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-```
+To deploy `apps/admin` as a separate project on Vercel:
 
-### Remote Caching
-
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo login
-```
-
-Without global `turbo`, use your package manager:
-
-```sh
-cd my-turborepo
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo link
-```
-
-Without global `turbo`:
-
-```sh
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turborepo.dev/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.dev/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.dev/docs/reference/configuration)
-- [CLI Usage](https://turborepo.dev/docs/reference/command-line-reference)
+1. Import the same repository into a new Vercel project (e.g. `exvion-admin`).
+2. Set **Root Directory** to `apps/admin`.
+3. Set **Framework Preset** to `Next.js`.
+4. Configure environment variables (`NEXT_PUBLIC_API_URL=https://api.exvionglobal.com`).
+5. Deploy.

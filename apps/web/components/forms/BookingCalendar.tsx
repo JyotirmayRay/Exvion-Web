@@ -27,9 +27,9 @@ export function BookingCalendar({ accentColor, serviceTitle }: { accentColor: st
   const fetchSlots = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/bookings/available?date=${selectedDate.toISOString()}`);
-      const data = await res.json();
-      setSlots(data);
+      const { fetchAvailableSlots } = await import("@/lib/api");
+      const data = await fetchAvailableSlots(selectedDate);
+      setSlots(Array.isArray(data) ? data : []);
     } catch (err) {
       console.error("Failed to fetch slots", err);
     } finally {
@@ -41,20 +41,13 @@ export function BookingCalendar({ accentColor, serviceTitle }: { accentColor: st
     if (!selectedSlot || !leadId) return;
     setBookingStatus("submitting");
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/bookings/create`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          leadId,
-          startTime: selectedSlot.start,
-          startTimeEnd: selectedSlot.end,
-        }),
+      const { createBooking } = await import("@/lib/api");
+      await createBooking({
+        leadId,
+        startTime: selectedSlot.start,
+        startTimeEnd: selectedSlot.end,
       });
-      if (res.ok) {
-        setBookingStatus("confirmed");
-      } else {
-        setBookingStatus("idle");
-      }
+      setBookingStatus("confirmed");
     } catch (err) {
       console.error("Booking failed", err);
       setBookingStatus("idle");

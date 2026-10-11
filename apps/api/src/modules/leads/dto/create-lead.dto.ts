@@ -21,8 +21,9 @@ export class CreateLeadDto {
   @IsEmail()
   email: string;
 
+  @IsOptional()
   @IsString()
-  phone: string;
+  phone?: string;
 
   @IsString()
   serviceType: string;

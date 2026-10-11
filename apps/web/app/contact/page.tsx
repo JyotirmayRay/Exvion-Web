@@ -49,26 +49,25 @@ export default function ContactPage() {
     e.preventDefault();
     setStatus("loading");
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/leads/create`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: form.name,
-          email: form.email,
-          phone: form.phone,
-          serviceId: form.service || "general-inquiry",
-          answers: [
-            { questionId: "budget", value: form.budget },
-            { questionId: "message", value: form.message },
-          ],
-        }),
+      const { submitLead } = await import("@/lib/api");
+      await submitLead({
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        serviceType: form.service || "General Inquiry",
+        budget: form.budget,
+        description: form.message,
+        source: "contact-page",
+        answers: [
+          { question: "Budget", answer: form.budget },
+          { question: "Message", answer: form.message },
+        ],
       });
-      if (!res.ok) throw new Error("Submission failed");
       setStatus("success");
       setForm({ name: "", email: "", phone: "", service: "", budget: "", message: "" });
     } catch (err: any) {
       setStatus("error");
-      setErrorMsg("Something went wrong. Please try again or reach us directly.");
+      setErrorMsg(err.message || "Something went wrong. Please try again or reach us directly.");
     }
   };
 

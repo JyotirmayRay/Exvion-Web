@@ -11,7 +11,7 @@ export default function Services() {
           What We Build
         </span>
         <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
-          17 Services. One Team. <span className="gradient-text">Real Outcomes.</span>
+          {services.length} Services. One Team. <span className="gradient-text">Real Outcomes.</span>
         </h2>
         <p className="text-text-secondary text-lg leading-relaxed">
           From AI automation to full SaaS platforms — we build the systems that move your business forward.

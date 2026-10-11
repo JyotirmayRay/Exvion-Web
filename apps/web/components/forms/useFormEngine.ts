@@ -172,10 +172,10 @@ export function useFormEngine(config: FormConfig) {
     };
 
     try {
-      await submitLead(payload);
+      const res = await submitLead(payload);
       setIsSubmitted(true);
       const store = (await import("@/store/useFormStore")).useFormStore.getState();
-      store.setSuccess(true);
+      store.setSuccess(true, res?.leadId || res?.id);
     } catch (err: any) {
       setSubmissionError(err.message || "Failed to submit request.");
     } finally {

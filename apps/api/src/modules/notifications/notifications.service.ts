@@ -5,11 +5,14 @@ import { format } from "date-fns";
 
 @Injectable()
 export class NotificationsService {
-  private resend: Resend;
+  private resend?: Resend;
   private readonly logger = new Logger(NotificationsService.name);
 
   constructor(private config: ConfigService) {
-    this.resend = new Resend(this.config.get("RESEND_API_KEY"));
+    const apiKey = this.config.get<string>("RESEND_API_KEY");
+    if (apiKey) {
+      this.resend = new Resend(apiKey);
+    }
   }
 
   async onLeadCreated(
@@ -21,13 +24,13 @@ export class NotificationsService {
       this.sendClientConfirmation(lead),
       this.sendAdminAlert(lead, tier, reasons),
       this.sendWhatsAppToClient(lead),
-      tier === "high" ? this.sendAdminWhatsApp(lead, tier) : Promise.resolve(),
+      tier === "high" ? this.sendAdminWhatsApp(lead) : Promise.resolve(),
     ]);
   }
 
   async sendBookingConfirmation(booking: any) {
     try {
-      if (!this.config.get("RESEND_API_KEY")) return;
+      if (!this.resend) return;
       
       const date = format(new Date(booking.startTime), "EEEE, MMMM do");
       const time = format(new Date(booking.startTime), "h:mm a");
@@ -46,7 +49,7 @@ export class NotificationsService {
 
   async sendClientConfirmation(lead: any) {
     try {
-      if (!this.config.get("RESEND_API_KEY")) {
+      if (!this.resend) {
         this.logger.warn("RESEND_API_KEY not set, skipping email");
         return;
       }
@@ -68,7 +71,7 @@ export class NotificationsService {
     reasons: string[],
   ) {
     try {
-      if (!this.config.get("RESEND_API_KEY")) return;
+      if (!this.resend) return;
       await this.resend.emails.send({
         from: "Exvion Lead System <leads@exvionglobal.com>",
         to: this.config.get<string>("ADMIN_EMAIL")!,
@@ -96,7 +99,7 @@ export class NotificationsService {
     }
   }
 
-  async sendAdminWhatsApp(lead: any, tier: string) {
+  async sendAdminWhatsApp(lead: any) {
     try {
       if (!this.config.get("WHATSAPP_API_KEY")) return;
       const message = `[URGENT] *HIGH VALUE LEAD*\n\nName: ${lead.name}\nService: ${lead.serviceType}\nBudget: ${lead.budget}\nTimeline: ${lead.timeline}\nScore: ${lead.score}\nPhone: ${lead.phone}\nEmail: ${lead.email}\n\nReply immediately!`;

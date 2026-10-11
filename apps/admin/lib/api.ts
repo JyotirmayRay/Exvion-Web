@@ -1,4 +1,10 @@
-const BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/api";
+const getBaseUrl = () => {
+  const envUrl = process.env.NEXT_PUBLIC_API_URL;
+  if (!envUrl) return "http://localhost:3001/api";
+  const clean = envUrl.replace(/\/+$/, "");
+  return clean.endsWith("/api") ? clean : `${clean}/api`;
+};
+const BASE = getBaseUrl();
 
 const getToken = () => {
   if (typeof window === "undefined") return null;

@@ -3,7 +3,7 @@ import { PrismaService } from "../../prisma/prisma.service";
 import { CreateBookingDto } from "./dto/create-booking.dto";
 import { NotificationsService } from "../notifications/notifications.service";
 import { SettingsService } from "../settings/settings.service";
-import { addMinutes, startOfDay, endOfDay, format, isAfter, isBefore, addDays } from "date-fns";
+import { addMinutes, startOfDay, endOfDay, isBefore } from "date-fns";
 import { google } from "googleapis";
 
 @Injectable()

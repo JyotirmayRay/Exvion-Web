@@ -55,16 +55,9 @@ export const MultiStepForm = ({
         })),
       };
 
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/leads/create`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        }
-      );
-
-      if (res.ok) setSuccess(true);
+      const { submitLead } = await import("@/lib/api");
+      await submitLead(payload as any);
+      setSuccess(true);
     } catch (err) {
       console.error("Form submission error:", err);
     } finally {

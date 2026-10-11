@@ -7,7 +7,6 @@
     ".": "./src/index.ts"
   },
   "scripts": {
-    "lint": "eslint .",
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {

@@ -56,15 +56,14 @@ const Navbar = () => {
   const handleQuickSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/leads/create`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: quickForm.name,
-          email: quickForm.email,
-          serviceId: "mobile-quick-contact",
-          answers: [{ query: "Message", value: quickForm.msg }],
-        }),
+      const { submitLead } = await import("@/lib/api");
+      await submitLead({
+        name: quickForm.name,
+        email: quickForm.email,
+        serviceType: "Quick Contact",
+        description: quickForm.msg,
+        source: "navbar-quick-contact",
+        answers: [{ question: "Message", answer: quickForm.msg }],
       });
       setFormSent(true);
     } catch { setFormSent(true); }

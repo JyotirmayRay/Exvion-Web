@@ -6,6 +6,7 @@ import { UpdateLeadStatusDto, AddNoteDto } from "./dto/update-lead.dto";
 import { QueryLeadsDto } from "./dto/query-lead.dto";
 import { calculateLeadScore } from "./scoring.engine";
 import { LeadStatus, Lead, Note } from "@exvion/database";
+import * as XLSX from "xlsx";
 
 @Injectable()
 export class LeadsService {
@@ -29,7 +30,7 @@ export class LeadsService {
       data: {
         name: dto.name,
         email: dto.email,
-        phone: dto.phone,
+        phone: dto.phone || "Not provided",
         serviceType: dto.serviceType,
         projectType: dto.projectType,
         stage: dto.stage,
@@ -246,11 +247,10 @@ export class LeadsService {
     });
 
     if (query.format === 'xlsx') {
-      const { utils, write } = require('xlsx');
-      const ws = utils.aoa_to_sheet([headers, ...rows]);
-      const wb = utils.book_new();
-      utils.book_append_sheet(wb, ws, "Leads");
-      const buf = write(wb, { type: 'buffer', bookType: 'xlsx' });
+      const ws = XLSX.utils.aoa_to_sheet([headers, ...rows]);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "Leads");
+      const buf = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx' });
       return buf;
     }
 

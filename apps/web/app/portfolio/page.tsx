@@ -111,20 +111,19 @@ export default function PortfolioPage() {
     e.preventDefault();
     setStatus("loading");
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/leads/create`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: form.name,
-          email: form.email,
-          serviceId: "portfolio-inquiry",
-          answers: [
-            { query: "Budget", value: form.budget },
-            { query: "Project Details", value: form.details }
-          ]
-        }),
+      const { submitLead } = await import("@/lib/api");
+      await submitLead({
+        name: form.name,
+        email: form.email,
+        serviceType: "Portfolio Inquiry",
+        budget: form.budget,
+        description: form.details,
+        source: "portfolio-page",
+        answers: [
+          { question: "Budget", answer: form.budget },
+          { question: "Project Details", answer: form.details }
+        ]
       });
-      if (!res.ok) throw new Error("Submission failed");
       setStatus("success");
       setForm({ name: "", email: "", budget: "", details: "" });
     } catch {

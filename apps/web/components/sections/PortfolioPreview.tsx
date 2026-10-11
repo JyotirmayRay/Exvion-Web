@@ -95,7 +95,7 @@ const PortfolioPreview = () => {
                   
                   {/* Dashboard Header Mockup */}
                   <div className="relative h-32 border-b border-white/5 overflow-hidden bg-gradient-to-b from-white/[0.03] to-transparent shrink-0">
-                    <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.03] mix-blend-overlay" />
+                    <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:16px_16px] opacity-40 mix-blend-overlay" />
                     <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: `linear-gradient(90deg, ${c.glowColor}, transparent)` }} />
                     
                     <div className="p-5 flex flex-col gap-2 h-full justify-between relative z-10">
